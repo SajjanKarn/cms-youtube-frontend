@@ -16,15 +16,12 @@ const AllContact = () => {
   useEffect(async () => {
     setLoading(true);
     try {
-      const res = await fetch(
-        `https://cms-codewithsajjan.herokuapp.com/api/mycontacts`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+      const res = await fetch(`http://localhost:8000/api/mycontacts`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       const result = await res.json();
       if (!result.error) {
         setContacts(result.contacts);
@@ -41,15 +38,12 @@ const AllContact = () => {
   const deleteContact = async (id) => {
     if (window.confirm("are you sure you want to delete this contact ?")) {
       try {
-        const res = await fetch(
-          `https://cms-codewithsajjan.herokuapp.com/api/delete/${id}`,
-          {
-            method: "DELETE",
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
+        const res = await fetch(`http://localhost:8000/api/delete/${id}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
         const result = await res.json();
         if (!result.error) {
           setContacts(result.myContacts);

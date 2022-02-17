@@ -24,17 +24,14 @@ const CreateContact = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const res = await fetch(
-      `https://cms-codewithsajjan.herokuapp.com/api/contact`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        body: JSON.stringify(userDetails),
-      }
-    );
+    const res = await fetch(`http://localhost:8000/api/contact`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(userDetails),
+    });
     const result = await res.json();
     if (!result.error) {
       toast.success(`Created [${userDetails.name}] contact`);
